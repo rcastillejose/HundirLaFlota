@@ -2,9 +2,6 @@ package HundirLaFlota;
 import tools.tools;
 public class barcos {
 
-	public static void main(String args) {
-		tools tools = new tools();
-	}
 	/*
 	 * Este metodo comprobara si se est� intentando colocar un barco donde ya hay
 	 * otro situado
