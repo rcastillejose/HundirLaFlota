@@ -124,7 +124,7 @@ public class tools {
 		return valor;
 	}
 	
-	
+	// Metodo en el que se introduciran coordenadas para un tablero
 	public int[] coordenadas(String msg) {
 		boolean coordenadaCorrecta=false;
 		Scanner entrada = new Scanner(System.in);
