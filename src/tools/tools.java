@@ -124,18 +124,29 @@ public class tools {
 		return valor;
 	}
 	
+	
 	public int[] coordenadas(String msg) {
+		boolean coordenadaCorrecta=false;
 		Scanner entrada = new Scanner(System.in);
+		int[] coordenadas = new int[2];
 		String teclado;
-		int fila;
-		int columna;
 		
-		System.out.println(msg);
-		teclado = entrada.next();
-		fila = (int) teclado.charAt(0);
-		columna = (int) teclado.charAt(2);
+		while(!coordenadaCorrecta) {
+			
+			System.out.println(msg);
+			teclado = entrada.next();
+			if (teclado.length()<2) {
+				System.out.println("Introduce una dirección válida");
+				teclado = entrada.next();
+			} else {
+			coordenadas[0] = (int) teclado.toUpperCase().charAt(0);
+			coordenadas[1] = (int) teclado.charAt(1);
+			coordenadaCorrecta = true;
+			}
+		}	
 		
-		return new int[] {fila,columna};
+		return coordenadas;
+		//return new int[] {fila,columna};
 	//  int coordenadas[] = coordenadas();
 	//  fila = coordenadas[0]; 
 	//	columna = coordenadas[1]);
@@ -163,6 +174,8 @@ public class tools {
 		char letra=(char)resultado;
 		return letra;
 	}
+	
+	
 	public static int numAleatorio(int maximo, int minimo) {
 		int random=(int)(Math.random()*(maximo-minimo+1)+minimo);
 		return random;
