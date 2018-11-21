@@ -59,7 +59,7 @@ public class barcos {
 	 * En este m�todo se comprobar� si el barco se va a intentar colocar dentro de el tablero
 	 * o se intenta insertar fuera de el tablero
 	 */
-	public static boolean colocarBarco(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion,boolean jugador){
+	public static boolean cabeBarco(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion,boolean jugador){
 		// Creamos la variable en la que se va a almacenar si el barco queda dentro del tablero o no
 		boolean dentro = true;
 			
@@ -160,7 +160,7 @@ public class barcos {
 					//en el tablero entonces colocaras el barco con una B de barco restando la fila mientras la 
 					//longitud del barco sea mayor que 0
 					if (orientacion==1) {
-						if ((colocarBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true
+						if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true
 								&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false)) {
 							do {
 								
@@ -173,7 +173,7 @@ public class barcos {
 					//en el tablero entonces colocaras el barco con una B de barco sumando la fila mientras la 
 					//longitud del barco sea mayor que 0
 					} else if (orientacion==2) {
-						if (colocarBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
+						if (cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
 								&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false) {
 							do {
 								tablero[fila][columna]='B';
@@ -186,7 +186,7 @@ public class barcos {
 					//en el tablero entonces colocaras el barco con una B de barco restando la columna mientras la 
 					//longitud del barco sea mayor que 0
 					} else if (orientacion==3) {
-						if (colocarBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
+						if (cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
 								&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false) {
 							do {
 								tablero[fila][columna]='B';
@@ -200,7 +200,7 @@ public class barcos {
 					//en el tablero entonces colocaras el barco con una B de barco sumando la columna mientras la 
 					//longitud del barco sea mayor que 0	
 					} else if (orientacion==4) {
-						if (colocarBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
+						if (cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
 								&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false) {
 							do {
 								tablero[fila][columna]='B';
@@ -228,7 +228,7 @@ public class barcos {
 						//Aqui damos una posicion aleatoria para un barco
 						fila=tools.numAleatorio(0, 9);	
 						columna=tools.numAleatorio(1, 9);
-						longitudBarco=barcos[i];
+						longitudBarco=barcos[i];	
 						orientacion=tools.numAleatorio(1,4);
 						
 				}
@@ -242,72 +242,14 @@ public class barcos {
 		 */
 	public boolean colocarBarco(char[][] tablero, char [][] tableroPC, int longitudBarco, int fila, int columna, int orientacion,boolean jugador){
 		//Si jugador es true, quiere decir que vamos a comprobar y colocar en el tablero del jugador
-			if(jugador==true) {
-				//primero comprueba según la dirección
-				if(orientacion==1) {
-					//al ser orientación 1, aumentamus la fila solamente para que el barco se posicione hacia arriba
-					for(int i=0;i<longitudBarco;i++, fila--) {
-						if((hayColision(tablero, longitudBarco, fila, columna, orientacion))) {
-							return false;
-						}
-					}
-				}else {
-					if(orientacion==2) {
-						for(int i=0;i<longitudBarco;i++, fila++) {
-							if((hayColision(tablero, longitudBarco, fila, columna, orientacion))) {
-								return false;
-							}
-						}
-					}else {
-						if(orientacion==3) {
-							for(int i=0;i<longitudBarco;i++, columna++) {
-								if((hayColision(tablero, longitudBarco, fila, columna, orientacion))) {
-									return false;
-								}
-							}
-						}else {
-							if(orientacion==4) {
-								for(int i=0;i<longitudBarco;i++, columna--) {
-									if((hayColision(tablero, longitudBarco, fila, columna, orientacion))) {
-										return false;
-									}
-								}
-							}
-						}
-					}
-				}
-				//Si no hay colisión coloca el barco según la dirección
-				if(orientacion==1) {
-					for(int i=0;i<longitudBarco;i++, fila--) {
-						tablero[fila][columna]='b';
-					}
-				}else {
-					if(orientacion==2) {
-						for(int i=0;i<longitudBarco;i++, fila++) {
-							tablero[fila][columna]='b';
-						}
-					}else {
-						if(orientacion==3) {
-							for(int i=0;i<longitudBarco;i++, columna++) {
-								tablero[fila][columna]='b';
-							}
-						}else {
-							if(orientacion==4) {
-								for(int i=0;i<longitudBarco;i++, columna--) {
-									tablero[fila][columna]='b';
-								}
-							}
-						}
-					}
-				}
-				
-				return true;
-			}
-			else {
+			
 				//A partir de aquí hace lo mismo pero para el caso de que haya que posicionar barcos del pc
 				if(orientacion==1) {
 					for(int i=0;i<longitudBarco;i++, fila--) {
 						if((hayColision(tableroPC, longitudBarco, fila, columna, orientacion))) {
+							return false;
+						}
+						if(!cabeBarco(tableroPC, longitudBarco, fila, columna, orientacion, jugador)) {
 							return false;
 						}
 					}
@@ -317,6 +259,9 @@ public class barcos {
 							if((hayColision(tableroPC, longitudBarco, fila, columna, orientacion))) {
 								return false;
 							}
+							if(!cabeBarco(tableroPC, longitudBarco, fila, columna, orientacion, jugador)) {
+								return false;
+							}
 						}
 					}else {
 						if(orientacion==3) {
@@ -324,11 +269,17 @@ public class barcos {
 								if((hayColision(tableroPC, longitudBarco, fila, columna, orientacion))) {
 									return false;
 								}
+								if(!cabeBarco(tableroPC, longitudBarco, fila, columna, orientacion, jugador)) {
+									return false;
+								}
 							}
 						}else {
 							if(orientacion==4) {
 								for(int i=0;i<longitudBarco;i++, columna--) {
 									if((hayColision(tableroPC, longitudBarco, fila, columna, orientacion))) {
+										return false;
+									}
+									if(!cabeBarco(tableroPC, longitudBarco, fila, columna, orientacion, jugador)) {
 										return false;
 									}
 								}
@@ -339,22 +290,22 @@ public class barcos {
 				
 				if(orientacion==1) {
 					for(int i=0;i<longitudBarco;i++, fila--) {
-						tableroPC[fila][columna]='b';
+						tableroPC[fila][columna]='B';
 					}
 				}else {
 					if(orientacion==2) {
 						for(int i=0;i<longitudBarco;i++, fila++) {
-							tableroPC[fila][columna]='b';
+							tableroPC[fila][columna]='B';
 						}
 					}else {
 						if(orientacion==3) {
 							for(int i=0;i<longitudBarco;i++, columna++) {
-								tableroPC[fila][columna]='b';
+								tableroPC[fila][columna]='B';
 							}
 						}else {
 							if(orientacion==4) {
 								for(int i=0;i<longitudBarco;i++, columna--) {
-									tableroPC[fila][columna]='b';
+									tableroPC[fila][columna]='B';
 								}
 							}
 						}
@@ -362,7 +313,7 @@ public class barcos {
 				}
 				
 				return true;
-			}
+			
 		}
 
 }
