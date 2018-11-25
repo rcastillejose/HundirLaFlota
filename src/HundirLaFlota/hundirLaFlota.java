@@ -25,8 +25,8 @@ public class hundirLaFlota {
 		System.out.println("		**************************************************");
 		System.out.println("		****      BIENVENIDO A HUNDIR LA FLOTA        ****");
 		System.out.println("		**************************************************");
-		System.out.println("		**************************************************");
-		System.out.println("				      RDR                                 ");
+		System.out.println("		*********************************************RDR *");
+		System.out.println();
 		System.out.println();
 		System.out.println();
 		System.out.println();

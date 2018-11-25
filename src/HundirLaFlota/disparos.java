@@ -26,22 +26,23 @@ public class disparos {
 	public void disparoJugador(char[][] tableroDisparosJugador, char[][] tableroPC) {
 
 		String disparo;
-		String posicion;
+		int[] posicion = new int[2];
 		int fila;
 		int columna;
 
 		//
 		do {
-			posicion = tools.obtenerString("hola");
+			tools.coordenadas("Indica la posicion a la que deseas disparar Ej.[A4]",posicion);
 			disparo =  tools.obtenerString("Indica la posicion donde quieres disparar");
-			fila = (int) disparo.charAt(0);
-			columna = (int) disparo.charAt(1);
+			fila = posicion[0];
+			columna = posicion[1];
 
 		} while (tableroPC[fila][columna] != '*' || tableroPC[fila][columna] != 'T');
 
 		if (tableroPC[fila][columna] == 'B') {
 			tableroPC[fila][columna] = 'T';
-
+		} else {
+			tableroPC[fila][columna] = '*';
 		}
 
 	}

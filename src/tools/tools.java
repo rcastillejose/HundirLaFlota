@@ -125,10 +125,9 @@ public class tools {
 	}
 	
 	// Metodo en el que se introduciran coordenadas para un tablero
-	public int[] coordenadas(String msg) {
+	public static int[] coordenadas(String msg,int[]coordenadas) {
 		boolean coordenadaCorrecta=false;
 		Scanner entrada = new Scanner(System.in);
-		int[] coordenadas = new int[2];
 		String teclado;
 		
 		while(!coordenadaCorrecta) {
