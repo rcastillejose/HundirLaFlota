@@ -13,7 +13,6 @@ public class hundirLaFlota {
 		char[][] disparoJugador= new char [10][10];
 		char[][] tableroPc= new char [10][10];
 		char[][] disparoPc= new char [10][10];
-		int [] barcos = {2,2,2,3,3,4,};
 		
 		String nombre;
 		
@@ -25,7 +24,7 @@ public class hundirLaFlota {
 		System.out.println("		**************************************************");
 		System.out.println("		****      BIENVENIDO A HUNDIR LA FLOTA        ****");
 		System.out.println("		**************************************************");
-		System.out.println("		*********************************************RDR *");
+		System.out.println("		*********************************************RDR**");
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -44,18 +43,22 @@ public class hundirLaFlota {
 		//RELLENAMOS EL TABLERO DEL JUGADOR Y EL DEL PC
 		System.out.println("Bienvenido " + nombre + ", en primer luegar vamos a rellenar el siguiente tablero con tus barcos");
 		tableros.visualizar(tableroJ);
-
+		tools.enter();
+		
 		tools.borrar();
 		
-		tableros.visualizar(tableroJ);
-		System.out.println("Te quedan " + barcos.length + " barcos por introducir");
-		for (int i = barcos.length; i > 0 ; i--) {
-			
-			
-			System.out.println("Te quedan " + (i-1) + " barcos por introducir");
+		barcos.menuBarcos(tableroJ);
+		
+		System.out.println("Se han introducido todos los barcos correctamente");
+		tools.enter();
+		tools.borrar();
+		
+		//AHORA COMIENZA EL JUEGO
+
+			System.out.println("Tienes "+ barcos.vidas(tableroJ)+"vidas");
 			tableros.visualizar(tableroJ);
-			tools.borrar();
-		}
+		
+		
 		
 	}
 

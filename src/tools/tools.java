@@ -77,7 +77,7 @@ public class tools {
 		Scanner entrada = new Scanner(System.in);
 		System.out.println("Pulsa [INTRO] para continuar.");
 		entrada.nextLine();
-		entrada.nextLine();
+		
 	}
 	
 	//Metodo en el que se mostrar� un mensaje y habr� que introducir un caracter en may�scula
