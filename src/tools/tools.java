@@ -138,8 +138,9 @@ public class tools {
 				System.out.println("Introduce una dirección válida");
 				teclado = entrada.next();
 			} else {
-			coordenadas[0] = (int) teclado.toUpperCase().charAt(0);
-			coordenadas[1] = (int) teclado.charAt(1);
+			coordenadas[0] = (int) teclado.toUpperCase().charAt(0)-'A';
+			coordenadas[1] = (int) teclado.charAt(1)-'0';
+			System.out.println(coordenadas[0]+" "+coordenadas[1]);
 			coordenadaCorrecta = true;
 			}
 		}	

@@ -50,16 +50,34 @@ public class hundirLaFlota {
 		barcos.menuBarcos(tableroJ);
 		
 		System.out.println("Se han introducido todos los barcos correctamente");
+		barcos.colocarBarcosPC(tableroPc);
+		tableros.visualizar(tableroPc);
 		tools.enter();
 		tools.borrar();
 		
 		//AHORA COMIENZA EL JUEGO
-
+			do {
 			System.out.println("Tienes "+ barcos.vidas(tableroJ)+"vidas");
 			tableros.visualizar(tableroJ);
-		
-		
-		
+			System.out.println();
+			tableros.visualizar(disparoJugador);
+			System.out.println();
+			System.out.println();
+			System.out.println("Dispara el jugador");
+			disparos.disparoJugador(disparoJugador,tableroPc);
+			
+			if(barcos.vidas(tableroJ)==0) {
+				System.out.println("¡¡LO SIENTO, HAS PERDIDO!!");
+			}
+			
+			tools.borrar();
+			System.out.println("Dispara el pc");
+			disparos.disparoPC(disparoPc, tableroJ);
+			
+			if(barcos.vidas(tableroPc)==0) {
+				System.out.println("¡¡ENHORABUENA, HAS GANADO!!");
+			}
+			}while(barcos.vidas(tableroJ)!=0 || barcos.vidas(tableroPc)!=0);
 	}
 
 }

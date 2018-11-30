@@ -61,7 +61,7 @@ public class barcos {
 		Scanner teclado = new Scanner(System.in);
 		int opcion;
 		int contador = 0;
-		int barco2=4, barco3=3, barco4=1;
+		int barco2=3, barco3=2, barco4=1;
 		int longitudBarco;
 
 		do {
@@ -76,7 +76,7 @@ public class barcos {
 			opcion = tools.obtenerEntero("Elija una opción del 1 al 3");
 
 			//Si la opcion es menor que -1 o mayor que 3 saltaria una advertencia para introducir una opcion correcta
-			if (opcion < -1 || opcion > 3) {
+			if (opcion < 1 || opcion > 3) {
 				System.out.println("Las opciones validas son [1-3] [Salir -1]");
 				opcion = tools.obtenerEntero("Elija otra opcion");
 			}
@@ -85,36 +85,37 @@ public class barcos {
 			//Aqui vas incrementando los barcos dependiendo de la opcion que escojas mientras el contador sea distinto a 0
 			//cuando sea 0 parara y se ira a la siguiente
 			if (opcion == 1) {
-				do {
+				if (barco2!=0) {
 					longitudBarco = 2;
 					colocarBarcosJugador(tablero,longitudBarco);
 					tableros.visualizar(tablero);
 					barco2--;
-				} while (barco2 != 0);
-
-				if (opcion == 2) {
-					do {
-					longitudBarco = 3;
-					colocarBarcosJugador(tablero,longitudBarco);
-					barco3--;
-					tableros.visualizar(tablero);
-					} while (barco3 != 0);
-				}
-
-				if (opcion == 3) {
-					do {
-					longitudBarco = 4;
-					colocarBarcosJugador(tablero,longitudBarco);
-					barco4--;
-					tableros.visualizar(tablero);
-					} while (barco4 != 0);
 				}
 			}
+
+			else if (opcion == 2) {
+					if (barco3!=0) {
+					longitudBarco = 3;
+					colocarBarcosJugador(tablero,longitudBarco);
+					tableros.visualizar(tablero);
+					barco3--;
+					}
+				}
+
+			else if (opcion == 3) {
+					if (barco4!=0) {
+					longitudBarco = 4;
+					colocarBarcosJugador(tablero,longitudBarco);
+					tableros.visualizar(tablero);
+					barco4--;
+					}
+				}
+			
 			System.out.println("Barco introducido correctamente");
 	
 
 	
-		} while (barco2!=0 && barco3!=0 && barco4!=0);
+		} while (barco2!=0 || barco3!=0 || barco4!=0);
 
 	
 	}
@@ -195,6 +196,7 @@ public class barcos {
 		int fila;
 		int columna;
 		int orientacion;
+		int[] coordenadas = new int[2];
 		
 		String posicion;
 		
@@ -202,9 +204,9 @@ public class barcos {
 		boolean jugador=true;
 		
 
-		posicion = tools.obtenerString("Indique la posicion donde quieras colocar el barco");
-		fila=(int)posicion.charAt(0);
-		columna = posicion.charAt(1);
+		tools.coordenadas("Introduce las coordenadas donde irá el barco",coordenadas);
+		fila=coordenadas[0];
+		columna=coordenadas[1];
 		
 		System.out.println("En que direccion lo quieres: ");
 		System.out.println("---------------------------- ");
@@ -226,6 +228,7 @@ public class barcos {
 				do {
 					
 					tablero[fila][columna]='B';
+					longitudBarco--;
 					fila--;
 					
 				} while (longitudBarco>0);
@@ -234,10 +237,11 @@ public class barcos {
 		//en el tablero entonces colocaras el barco con una B de barco sumando la fila mientras la 
 		//longitud del barco sea mayor que 0
 		} else if (orientacion==2) {
-			if (cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
-					&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false)) {
 				do {
 					tablero[fila][columna]='B';
+					longitudBarco--;
 					fila++;
 					
 				} while (longitudBarco>0);
@@ -247,10 +251,11 @@ public class barcos {
 		//en el tablero entonces colocaras el barco con una B de barco restando la columna mientras la 
 		//longitud del barco sea mayor que 0
 		} else if (orientacion==3) {
-			if (cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
-					&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false)) {
 				do {
 					tablero[fila][columna]='B';
+					longitudBarco--;
 					columna--;
 					
 				} while (longitudBarco>0);
@@ -261,10 +266,11 @@ public class barcos {
 		//en el tablero entonces colocaras el barco con una B de barco sumando la columna mientras la 
 		//longitud del barco sea mayor que 0	
 		} else if (orientacion==4) {
-			if (cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true 
-					&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion, jugador)==true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion)==false)) {
 				do {
 					tablero[fila][columna]='B';
+					longitudBarco--;
 					columna++;
 					
 				} while (longitudBarco>0);
@@ -282,9 +288,10 @@ public class barcos {
 	/* 
 	 *Este metodo dara una posicion aleatoria para posicionar el barco
 	 */
-		public void colocarBarcosPC(char[][] tablero, char[][]tableroPC, int[] barcos){
+		public static void colocarBarcosPC(char[][]tableroPC){
 			int fila, columna, longitudBarco, orientacion;
 			boolean jugador=false;
+			 int[] barcos= {2,2,2,3,3,4};
 			
 			for(int i=0;i<barcos.length;i++) {				
 				do {
@@ -295,7 +302,7 @@ public class barcos {
 						orientacion=tools.numAleatorio(1,4);
 						
 				}
-				while(!colocarBarco(tablero, tableroPC, longitudBarco, fila, columna, orientacion, jugador));
+				while(!colocarBarco(tableroPC, longitudBarco, fila, columna, orientacion, jugador));
 				
 			}
 		}
@@ -303,7 +310,7 @@ public class barcos {
 		 * Este metodo comprueba llamando al metodo hayColision, que se pueda colocar el barco, en caso
 		 * afirmativo pasa un true como que se puede colocar el barco y lo coloca
 		 */
-	public boolean colocarBarco(char[][] tablero, char [][] tableroPC, int longitudBarco, int fila, int columna, int orientacion,boolean jugador){
+	public static boolean colocarBarco(char [][] tableroPC, int longitudBarco, int fila, int columna, int orientacion,boolean jugador){
 		//Si jugador es true, quiere decir que vamos a comprobar y colocar en el tablero del jugador
 			
 				//A partir de aquí hace lo mismo pero para el caso de que haya que posicionar barcos del pc
