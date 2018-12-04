@@ -7,7 +7,8 @@ import tools.tools;
 public class barcos {
 
 	/*
-	 * Este metodo comprobara si se está intentando colocar un barco donde ya hay otro situado
+	 * Este metodo comprobara si se está intentando colocar un barco donde ya hay
+	 * otro situado
 	 */
 	public static boolean hayColision(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion) {
 		// creamos la variable colision a false para guardar el resultado de la
@@ -58,8 +59,9 @@ public class barcos {
 		return colision;
 	}
 
-	/* 
-	 * Este método se encargara de crear un menú para ingresar los barcos del jugador
+	/*
+	 * Este método se encargara de crear un menú para ingresar los barcos del
+	 * jugador
 	 */
 	public static void menuBarcos(char[][] tablero) {
 
@@ -68,7 +70,7 @@ public class barcos {
 		int contador = 0;
 		int barco2 = 3, barco3 = 2, barco4 = 1;
 		int longitudBarco;
-
+//		CREAMOS EL MENÚ QUE SE REPETIRÁ HASTA INTRODUCIR LOS BARCOS
 		do {
 			tableros.visualizar(tablero);
 			System.out.println("----------------------------------------");
@@ -80,75 +82,62 @@ public class barcos {
 			System.out.println("---------------------------------");
 			opcion = tools.obtenerEntero("Elija una opción del 1 al 3");
 
-			// Si la opcion es menor que -1 o mayor que 3 saltaria una advertencia para
-			// introducir una opcion correcta
+// 			CONDICIONAMOS LA ELECCION DEL MENU
+
 			if (opcion < 1 || opcion > 3) {
 				System.out.println("Las opciones validas son [1-3] [Salir -1]");
 				opcion = tools.obtenerEntero("Elija otra opcion");
 			}
-
-			// Aqui vas incrementando los barcos dependiendo de la opcion que escojas
-			// mientras el contador sea distinto a 0
-			// cuando sea 0 parara y se ira a la siguiente
+//			SEGUN LA ELECCION DEL BARCO LE OTORGAMOS LONGITUD Y CONDICIONAMOS EL INTRODUCIR EL BARCO
 			if (opcion == 1) {
 				if (barco2 != 0) {
 					longitudBarco = 2;
-					if(colocarBarcosJugador(tablero,longitudBarco)==true) {
+					if (colocarBarcosJugador(tablero, longitudBarco) == true) {
 						barco2--;
 						System.out.println("Barco introducido correctamente");
-					}else {
-						System.out.println("Coordenadas incorrectas");;
+					} else {
+						System.out.println("Coordenadas incorrectas");
+						;
 					}
-					
-					
 				}
-			}
-
-			else if (opcion == 2) {
+			} else if (opcion == 2) {
 				if (barco3 != 0) {
 					longitudBarco = 3;
-					if(colocarBarcosJugador(tablero,longitudBarco)==true) {
+					if (colocarBarcosJugador(tablero, longitudBarco) == true) {
 						barco3--;
 						System.out.println("Barco introducido correctamente");
-					}else {
-						System.out.println("Coordenadas incorrectas");;
+					} else {
+						System.out.println("Coordenadas incorrectas");
+						;
 					}
 				}
-			}
-
-			else if (opcion == 3) {
+			} else if (opcion == 3) {
 				if (barco4 != 0) {
 					longitudBarco = 4;
-					if(colocarBarcosJugador(tablero,longitudBarco)==true) {
+					if (colocarBarcosJugador(tablero, longitudBarco) == true) {
 						barco4--;
 						System.out.println("Barco introducido correctamente");
-					}else {
-						System.out.println("Coordenadas incorrectas");;
+					} else {
+						System.out.println("Coordenadas incorrectas");
+						;
 					}
 				}
 			}
-
-			
-
 		} while (barco2 != 0 || barco3 != 0 || barco4 != 0);
 
 	}
 
 	/*
-	 * Este método se encarga de comprobar si se está situando el barco dentro de el tablero
+	 * Este método se encarga de comprobar si se está situando el barco dentro de el
+	 * tablero
 	 */
 	public static boolean cabeBarco(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion) {
-		// Creamos la variable en la que se va a almacenar si el barco queda dentro del
-		// tablero o no
-		boolean dentro = true;
+//		CREAMOS LA VARIABLE QUE NOS DIRÁ SI ESTA DENTRO DE EL TABLERO EL BARCO
+		boolean dentro = false;
 
-		// Se comprueba si el barco cabe seg�n la orientacion que este tenga
+//		COMPROBAMOS SEGÚN LA ORIENTACIÓN SI EL BARCO ESTÁ DENTRO DURANTE TODA SU LONGITUD
 		if (orientacion == 1) {
-			// Se realiza un bucle para que se realice la comprobaci�n siempre que el barco
-			// siga teniendo longitud
-			// y que no se est� intentando situar fuera
 			for (int i = 0; i < longitudBarco && dentro == true; i++, fila--) {
-
 				if (fila >= 0 && columna >= 1 && fila <= 9 && columna <= 9) {
 					dentro = true;
 				} else {
@@ -180,17 +169,16 @@ public class barcos {
 				}
 			}
 		}
-
-		// devolvemos el valor que nos indica si el barco quedaria dentro del tablero o
-		// no
+//		DEVOLVEMOS LA VARIABLE PARA AVERIGUAR SI HAY QUE REPETIR CON OTRA COORDENADA
 		return dentro;
 	}
 
 	/*
-	 * Método, que se encarga de hacer un recuento instantáneo que que le queda al poseedor del tablero que se nombre
+	 * Método, que se encarga de hacer un recuento instantáneo que que le queda al
+	 * poseedor del tablero que se nombre
 	 */
 	public static int vidas(char[][] tablero) {
-		// en la variable cuenta guardaremos el recuento de cada barco de todo el vector
+//		RECORREMOS LA MATRIZ BUSCANDO DONDE HAY REGISTROS DE BARCOS PARA CONTAR LAS VIDAS 
 		int cuenta = 0;
 		for (int i = 0; i < tablero[0].length; i++) {
 			for (int j = 0; j < tablero.length; j++) {
@@ -199,20 +187,23 @@ public class barcos {
 				}
 			}
 		}
-		return cuenta-1;
+//		DEVOLVEMOS EL RESULTADO MENOS 1 YA QUE TENEMOS UNA B EN EL TABLERO POR LAS COORDENADAS
+		return cuenta - 1;
 	}
 
 	/*
-	 * Desde menuBarcos se llama este método para introducir la orientacion hacia la que irá el barco y comprobar si colisiona o si cabe
+	 * Desde menuBarcos se llama este método para introducir la orientacion hacia la
+	 * que irá el barco y comprobar si colisiona o si cabe
 	 */
 	public static boolean colocarBarcosJugador(char[][] tablero, int longitudBarco) {
+//		CREAMOS LAS VARIABLES NECESARIAS PARA IMPLEMENTAR EL BARCO		
 		boolean resultado = false;
 		int fila;
 		int columna;
 		int orientacion;
 		int[] coordenadas = new int[2];
 
-		
+//		INTRODUCIMOS LAS COORDENADAS E INDICAMOS LA DIRECCIÓN QUE TENDRÁ EL BARCO
 		tableros.visualizar(tablero);
 		tools.coordenadas("Introduce las coordenadas donde irá el barco", coordenadas);
 		fila = coordenadas[0];
@@ -226,135 +217,88 @@ public class barcos {
 		System.out.println("4: Derecha ");
 
 		orientacion = tools.obtenerEntero("Introduce la orientación a continuacion: ");
-		if(ponerBarco(tablero,orientacion,fila,columna,longitudBarco)==false) {
+//		COMPROBAMOS SI EL BARCO SERÁ INTRODUCIDO O NOS TOCARÁ REPETIR EL METODO QUE SERÁ LLAMADO
+		if (ponerBarco(tablero, orientacion, fila, columna, longitudBarco) == false) {
 			return resultado;
-		}else {
-			return resultado =true;
+		} else {
+			return resultado = true;
 		}
-//		if (orientacion == 1) {
-//			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-//					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-//				do {
-//
-//					tablero[fila][columna] = 'B';
-//					longitudBarco--;
-//					fila--;
-//
-//				} while (longitudBarco > 0);
-//			}
-//
-//		} else if (orientacion == 2) {
-//			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-//					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-//				do {
-//					tablero[fila][columna] = 'B';
-//					longitudBarco--;
-//					fila++;
-//
-//				} while (longitudBarco > 0);
-//			}
-//
-//		} else if (orientacion == 3) {
-//			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-//					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-//				do {
-//					tablero[fila][columna] = 'B';
-//					longitudBarco--;
-//					columna--;
-//
-//				} while (longitudBarco > 0);
-//
-//			} else if (orientacion == 4) {
-//				if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-//						&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-//					do {
-//						tablero[fila][columna] = 'B';
-//						longitudBarco--;
-//						columna++;
-//
-//					} while (longitudBarco > 0);
-//				}
-//			}
-//		}
-
 	}
 
 	/*
-	 * Método que genera barcos y posiciones aleatorias en las que se se realizara hasta que estén todos los barcos colocados 
+	 * Método que genera barcos y posiciones aleatorias en las que se se realizara
+	 * hasta que estén todos los barcos colocados
 	 */
 	public static void barcoAleatorio(char[][] tablero) {
-
-//		Scanner teclado = new Scanner(System.in);
+//		CREAMOS LAS VARIABLES NECESARIAS Y EL VECTOR CON LOS BARCOS QUE SE VAN A INTRODUCIR DENTRO
 		int[] barcos = { 2, 2, 2, 3, 3, 4 };
-		int fila, columna, orientacion,longitudBarco;
+		int fila, columna, orientacion, longitudBarco;
+//		RECORREMOS LOS BARCOS UNO A UNO, PROPORCIONANDOLES UNA COORDENADA Y ORIENTACION ALEATORIA
+		for (int i = 0; i < barcos.length; i++) {
+//		REALIZAMOS UN BUCLE PARA INSERTAR UN BARCO SIEMPRE QUE LAS COORDENADAS NO SEAN LAS NECESARIAS			
+			do {
+				fila = (int) (Math.random() * 9);
+				columna = (int) (Math.random() * 8 + 1);
+				orientacion = (int) (Math.random() * 4 + 1);
+				longitudBarco = barcos[i];
+			} while (ponerBarco(tablero, orientacion, fila, columna, longitudBarco) == false);
+		}
+	}
 
-		// for (int i = 0; i < barcos.length; i++) {
-		
-			for (int i = 0;i<barcos.length;i++) {
-				do {	
-					fila = (int) (Math.random() * 9);
-					columna = (int) (Math.random() * 8 + 1);
-					orientacion = (int) (Math.random() * 4 + 1);
-					longitudBarco = barcos[i];
-					System.out.println(fila + " " + columna + " " + orientacion);
-				}while (ponerBarco(tablero,orientacion,fila,columna,longitudBarco)==false);
-			}
-		
-	}	
-	
 	/*
-	 * Método que comprobará si el barco que se ha generado aleatoriamente cabe dentro del vector o se coloca encima de otro barco
+	 * Método que comprobará si el barco que se ha generado aleatoriamente cabe
+	 * dentro del vector o se coloca encima de otro barco
 	 */
 	public static boolean ponerBarco(char[][] tablero, int orientacion, int fila, int columna, int longitudBarco) {
-			boolean resultado=false;
-			if (orientacion == 1) {
-				if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-						&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-					do {
+//		CREAMOS LA VARIABLE QUE NOS DIRÁ SI EL BARCO SE HA INTRODUCIDO
+		boolean resultado = false;
+//		CONDICIONAMOS POR ORIENTACIÓN SI SE VA A INTRODUCIR EL BARCO SI CABE Y NO SOLAPA 		
+		if (orientacion == 1) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+//		INGRESAMOS 'B' EN EL TABLERO HASTA QUE SE ACABE LA LONGITUD DEL BARCO				
+				do {
+					tablero[fila][columna] = 'B';
+					longitudBarco--;
+					fila--;
+				} while (longitudBarco > 0);
+//		CAMBIAMOS LA VARIABLE PARA SABER QUE SE HA INTRODUCIDO
+				resultado = true;
+			}
 
-						tablero[fila][columna] = 'B';
-						longitudBarco--;
-						fila--;
+		} else if (orientacion == 2) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+				do {
+					tablero[fila][columna] = 'B';
+					longitudBarco--;
+					fila++;
+				} while (longitudBarco > 0);
+				resultado = true;
+			}
 
-					} while (longitudBarco > 0);
-					resultado = true;
-				} 
-
-			} else if (orientacion == 2) {
-				if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-						&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-					do {
-						tablero[fila][columna] = 'B';
-						longitudBarco--;
-						fila++;
-
-					} while (longitudBarco > 0);
-					resultado = true;
-				}
-
-			} else if (orientacion == 3) {
-				if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-						&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-					do {
-						tablero[fila][columna] = 'B';
-						longitudBarco--;
-						columna--;
-
-					} while (longitudBarco > 0);
-					resultado = true;
-				}
-			} else if (orientacion == 4) {
-					if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-							&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-						do {
-							tablero[fila][columna] = 'B';
-							longitudBarco--;
-							columna++;
-
-						} while (longitudBarco > 0);
-						resultado = true;
-					}
-				}
-			return resultado;
-		}	
+		} else if (orientacion == 3) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+				do {
+					tablero[fila][columna] = 'B';
+					longitudBarco--;
+					columna--;
+				} while (longitudBarco > 0);
+				resultado = true;
+			}
+		} else if (orientacion == 4) {
+			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+				do {
+					tablero[fila][columna] = 'B';
+					longitudBarco--;
+					columna++;
+				} while (longitudBarco > 0);
+				resultado = true;
+			}
+		}
+//		DEVOLVEMOS EL RESULTADO DE LO QUE SE HA REALIZADO PARA ACLARAR SI SE HA INTRODUCIDO EL BARCO
+		return resultado;
+	}
 }
