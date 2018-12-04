@@ -97,7 +97,7 @@ public class barcos {
 						System.out.println("Barco introducido correctamente");
 					} else {
 						System.out.println("Coordenadas incorrectas");
-						;
+						
 					}
 				}
 			} else if (opcion == 2) {
@@ -108,7 +108,7 @@ public class barcos {
 						System.out.println("Barco introducido correctamente");
 					} else {
 						System.out.println("Coordenadas incorrectas");
-						;
+						
 					}
 				}
 			} else if (opcion == 3) {
@@ -119,7 +119,7 @@ public class barcos {
 						System.out.println("Barco introducido correctamente");
 					} else {
 						System.out.println("Coordenadas incorrectas");
-						;
+						
 					}
 				}
 			}
@@ -133,7 +133,7 @@ public class barcos {
 	 */
 	public static boolean cabeBarco(char[][] tablero, int longitudBarco, int fila, int columna, int orientacion) {
 //		CREAMOS LA VARIABLE QUE NOS DIRÁ SI ESTA DENTRO DE EL TABLERO EL BARCO
-		boolean dentro = false;
+		boolean dentro = true;
 
 //		COMPROBAMOS SEGÚN LA ORIENTACIÓN SI EL BARCO ESTÁ DENTRO DURANTE TODA SU LONGITUD
 		if (orientacion == 1) {
