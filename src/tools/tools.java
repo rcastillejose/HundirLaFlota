@@ -7,7 +7,7 @@ public class tools {
 	/*
 	 * Método que inserta líneas para hacer parecer que se borra la pantalla 
 	 */
-	public void borrar() {
+	public static void borrar() {
 		for (int i = 0; i < 40; i++) {
 			System.out.println();
 		}
@@ -80,7 +80,7 @@ public class tools {
 			} else {
 			coordenadas[0] = (int) teclado.toUpperCase().charAt(0)-'A';
 			coordenadas[1] = (int) teclado.charAt(1)-'0';
-			System.out.println(coordenadas[0]+" "+coordenadas[1]);
+			//System.out.println(coordenadas[0]+" "+coordenadas[1]);
 			coordenadaCorrecta = true;
 			}
 		}	

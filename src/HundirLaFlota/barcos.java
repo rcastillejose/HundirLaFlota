@@ -93,31 +93,42 @@ public class barcos {
 			if (opcion == 1) {
 				if (barco2 != 0) {
 					longitudBarco = 2;
-					colocarBarcosJugador(tablero, longitudBarco);
-					tableros.visualizar(tablero);
-					barco2--;
+					if(colocarBarcosJugador(tablero,longitudBarco)==true) {
+						barco2--;
+						System.out.println("Barco introducido correctamente");
+					}else {
+						System.out.println("Coordenadas incorrectas");;
+					}
+					
+					
 				}
 			}
 
 			else if (opcion == 2) {
 				if (barco3 != 0) {
 					longitudBarco = 3;
-					colocarBarcosJugador(tablero, longitudBarco);
-					tableros.visualizar(tablero);
-					barco3--;
+					if(colocarBarcosJugador(tablero,longitudBarco)==true) {
+						barco3--;
+						System.out.println("Barco introducido correctamente");
+					}else {
+						System.out.println("Coordenadas incorrectas");;
+					}
 				}
 			}
 
 			else if (opcion == 3) {
 				if (barco4 != 0) {
 					longitudBarco = 4;
-					colocarBarcosJugador(tablero, longitudBarco);
-					tableros.visualizar(tablero);
-					barco4--;
+					if(colocarBarcosJugador(tablero,longitudBarco)==true) {
+						barco4--;
+						System.out.println("Barco introducido correctamente");
+					}else {
+						System.out.println("Coordenadas incorrectas");;
+					}
 				}
 			}
 
-			System.out.println("Barco introducido correctamente");
+			
 
 		} while (barco2 != 0 || barco3 != 0 || barco4 != 0);
 
@@ -194,20 +205,15 @@ public class barcos {
 	/*
 	 * Desde menuBarcos se llama este método para introducir la orientacion hacia la que irá el barco y comprobar si colisiona o si cabe
 	 */
-	public static void colocarBarcosJugador(char[][] tablero, int longitudBarco) {
-
-//		Scanner teclado = new Scanner(System.in);
-
+	public static boolean colocarBarcosJugador(char[][] tablero, int longitudBarco) {
+		boolean resultado = false;
 		int fila;
 		int columna;
 		int orientacion;
 		int[] coordenadas = new int[2];
 
-		String posicion;
-
-		// Jugador = true ya que estamos hablando de los barcos del jugador, no del pc.
-		boolean jugador = true;
-
+		
+		tableros.visualizar(tablero);
 		tools.coordenadas("Introduce las coordenadas donde irá el barco", coordenadas);
 		fila = coordenadas[0];
 		columna = coordenadas[1];
@@ -219,75 +225,57 @@ public class barcos {
 		System.out.println("3: Izquierda ");
 		System.out.println("4: Derecha ");
 
-		// Importas el metodo obtenerEntero que lo que hara sera seleccionar un numero
-		// del 1 al 4
-		// para elegir la orientacion
 		orientacion = tools.obtenerEntero("Introduce la orientación a continuacion: ");
-
-		// Si marcas la opcion 1 te creara un barco hacia arriba si hay un hueco y no
-		// hay colision
-		// en el tablero entonces colocaras el barco con una B de barco restando la fila
-		// mientras la
-		// longitud del barco sea mayor que 0
-		if (orientacion == 1) {
-			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-				do {
-
-					tablero[fila][columna] = 'B';
-					longitudBarco--;
-					fila--;
-
-				} while (longitudBarco > 0);
-			}
-			// Si marcas la opcion 2 te creara un barco hacia abajo si hay un hueco y no hay
-			// colision
-			// en el tablero entonces colocaras el barco con una B de barco sumando la fila
-			// mientras la
-			// longitud del barco sea mayor que 0
-		} else if (orientacion == 2) {
-			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-				do {
-					tablero[fila][columna] = 'B';
-					longitudBarco--;
-					fila++;
-
-				} while (longitudBarco > 0);
-			}
-
-			// Si marcas la opcion 3 te creara un barco hacia la izquierda si hay un hueco y
-			// no hay colision
-			// en el tablero entonces colocaras el barco con una B de barco restando la
-			// columna mientras la
-			// longitud del barco sea mayor que 0
-		} else if (orientacion == 3) {
-			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-				do {
-					tablero[fila][columna] = 'B';
-					longitudBarco--;
-					columna--;
-
-				} while (longitudBarco > 0);
-
-				// Si marcas la opcion 4 te creara un barco hacia la derecha si hay un hueco y
-				// no hay colision
-				// en el tablero entonces colocaras el barco con una B de barco sumando la
-				// columna mientras la
-				// longitud del barco sea mayor que 0
-			} else if (orientacion == 4) {
-				if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
-						&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
-					do {
-						tablero[fila][columna] = 'B';
-						longitudBarco--;
-						columna++;
-
-					} while (longitudBarco > 0);
-				}
-			}
+		if(ponerBarco(tablero,orientacion,fila,columna,longitudBarco)==false) {
+			return resultado;
+		}else {
+			return resultado =true;
 		}
+//		if (orientacion == 1) {
+//			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+//					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+//				do {
+//
+//					tablero[fila][columna] = 'B';
+//					longitudBarco--;
+//					fila--;
+//
+//				} while (longitudBarco > 0);
+//			}
+//
+//		} else if (orientacion == 2) {
+//			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+//					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+//				do {
+//					tablero[fila][columna] = 'B';
+//					longitudBarco--;
+//					fila++;
+//
+//				} while (longitudBarco > 0);
+//			}
+//
+//		} else if (orientacion == 3) {
+//			if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+//					&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+//				do {
+//					tablero[fila][columna] = 'B';
+//					longitudBarco--;
+//					columna--;
+//
+//				} while (longitudBarco > 0);
+//
+//			} else if (orientacion == 4) {
+//				if ((cabeBarco(tablero, longitudBarco, fila, columna, orientacion) == true
+//						&& hayColision(tablero, longitudBarco, fila, columna, orientacion) == false)) {
+//					do {
+//						tablero[fila][columna] = 'B';
+//						longitudBarco--;
+//						columna++;
+//
+//					} while (longitudBarco > 0);
+//				}
+//			}
+//		}
 
 	}
 

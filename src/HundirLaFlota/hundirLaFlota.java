@@ -42,19 +42,18 @@ public class hundirLaFlota {
 		tableros.iniciar(disparoPc);
 
 		// RELLENAMOS EL TABLERO DEL JUGADOR Y EL DEL PC
-		System.out.println(
-				"Bienvenido " + nombre + ", en primer luegar vamos a rellenar el siguiente tablero con tus barcos");
+		System.out.println("Bienvenido " + nombre + ", en primer luegar vamos a rellenar el siguiente tablero con tus barcos");
 		tableros.visualizar(tableroJ);
 		tools.enter();
 		tools.borrar();
 		barcos.menuBarcos(tableroJ);
 		System.out.println("Se han introducido todos los barcos del jugador correctamente");
-		tools.borrar();
 		tools.enter();
+		tools.borrar();
 
 		barcos.barcoAleatorio(tableroPc);
-		barcos.vidas(tableroPc);
-		tableros.visualizar(tableroPc);
+		//barcos.vidas(tableroPc);
+		//tableros.visualizar(tableroPc);
 		System.out.println("Se han introducido todos los barcos del pc correctamente");
 		tools.enter();
 		tools.borrar();
@@ -78,6 +77,7 @@ public class hundirLaFlota {
 			tools.borrar();
 			System.out.println("Dispara el pc");
 			disparos.disparoPC(disparoPc, tableroJ);
+			tools.enter();
 
 			if (barcos.vidas(tableroPc) == 0) {
 				System.out.println("¡¡ENHORABUENA, HAS GANADO!!");
